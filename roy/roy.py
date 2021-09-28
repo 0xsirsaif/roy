@@ -3,6 +3,7 @@ import subprocess
 import typer
 
 from sys_commands.mount_drive import mount_me
+from sys_commands.github import get_github_token
 
 app = typer.Typer()
 
@@ -20,6 +21,11 @@ def goodbye(name: str):
 @app.command()
 def mount(drive: str):
     mount_me(drive)
+
+
+@app.command()
+def github_token():
+    typer.echo(get_github_token())
 
 
 if __name__ == "__main__":
