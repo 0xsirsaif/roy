@@ -14,10 +14,11 @@ PROBLEMS = {}
 
 def get_task(update, context):
     today = str(date.today())
-    if isinstance(today, str):
-        update.message.reply_text(f"Today's task \n\n - {PROBLEMS.get(today)}")
+    task = PROBLEMS.get(today)
+    if task:
+        update.message.reply_text(f"Today's task \n\n - {task}")
     else:
-        update.message.reply_text("There's some error")
+        update.message.reply_text("No task for day")
 
 
 def main():
