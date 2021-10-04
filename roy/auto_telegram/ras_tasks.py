@@ -8,7 +8,7 @@ load_dotenv()
 TOKEN = os.environ.get("TOKEN")
 HEROKUAPP = os.environ.get("HEROKUAPP")
 
-PORT = int(os.environ.get('PORT', 5000))
+PORT = int(os.environ.get("PORT", 5000))
 PROBLEMS = {}
 
 
@@ -30,5 +30,5 @@ def main():
     updater.start_polling()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
