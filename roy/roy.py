@@ -1,9 +1,13 @@
+from typing import Optional, Tuple
 import typer
 
 from sys_commands.mount_drive import mount_me
 from sys_commands.github import get_github_token
 
 from scripts.imgs_to_file import pngs_to_pdf
+
+from readings.books import list_books, add_book, remove_book, clear_books
+
 
 app = typer.Typer()
 
@@ -31,6 +35,23 @@ def github_token():
 @app.command()
 def imgs_to_pdf(src: str, destination: str) -> None:
     pngs_to_pdf(src, destination)
+
+
+@app.command()
+def books(
+    add: Tuple[str, str] = typer.Option((None, None)),
+    rm: Optional[str] = typer.Option(None),
+    clear: Optional[str] = typer.Option(None),
+):
+    book_name, book_location = add
+    if book_name:
+        add_book(book_name, book_location)
+    if rm:
+        remove_book(rm)
+    if clear:
+        clear_books()
+
+    typer.echo(list_books())
 
 
 if __name__ == "__main__":
