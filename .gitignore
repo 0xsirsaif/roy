@@ -5,7 +5,7 @@ __pycache__/
 
 # Local Dirs
 data/
-roy/readings/BOOKS.json
+roy/readings/Books.json
 
 # C extensions
 *.so

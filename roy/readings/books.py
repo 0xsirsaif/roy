@@ -53,18 +53,18 @@ import json
 
 
 def list_books():
-    with open("/media/data/projects/roy/roy/readings/BOOKS.json", "r") as f:
+    with open("/media/data/projects/roy/roy/readings/Books.json", "r") as f:
         books = [i for i in json.load(f)]
         print(books)
 
 
 def add_book(name, location):
-    with open("/media/data/projects/roy/roy/readings/BOOKS.json", "r") as f:
+    with open("/media/data/projects/roy/roy/readings/Books.json", "r") as f:
         books = [i for i in json.load(f)]
 
     books.append({name: location})
 
-    with open("/media/data/projects/roy/roy/readings/BOOKS.json", "w") as output_file:
+    with open("/media/data/projects/roy/roy/readings/Books.json", "w") as output_file:
         json.dump(books, output_file)
 
 
@@ -73,5 +73,5 @@ def remove_book(book_name):
 
 
 def clear_books():
-    with open("/media/data/projects/roy/roy/readings/BOOKS.json", "w") as file:
+    with open("/media/data/projects/roy/roy/readings/Books.json", "w") as file:
         json.dump([], file)
