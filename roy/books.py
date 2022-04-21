@@ -1,39 +1,22 @@
 import json
-import subprocess
+from rich.table import Table
 
 
-def open_book(book):
-    with open("/readings/Books.json", "r") as f:
-        book_location = [
-            list(j.values())[0] for i, j in enumerate(json.load(f)) if i == int(book)
-        ]
+class PrintAllReads:
+    with open("/media/data/projects/roy/roy/Books.json") as json_file:
+        all_books = json.load(json_file)
 
-    try:
-        subprocess.run(["xdg-open", book_location[0]])
-    except IndexError:
-        print("No location")
+    def print_all_reads(self):
+        table = Table(title="All Reads")
 
+        table.add_column("Name", justify="right", style="cyan", no_wrap=True)
+        table.add_column("Author", style="magenta")
+        table.add_column("Progress", justify="left", style="green")
 
-def list_books():
-    with open("/readings/Books.json", "r") as f:
-        books = [(i, list(j.keys())) for i, j in enumerate(json.load(f))]
-        return books
+        for n in self.all_books:
+            book = self.all_books[n]
+            name, author, progress = book["name"], book["Author"], str(book["Progress"])
 
+            table.add_row(name, author, progress)
 
-def add_book(name, location):
-    with open("/readings/Books.json", "r") as f:
-        books = [i for i in json.load(f)]
-
-    books.append({name: location})
-
-    with open("/readings/Books.json", "w") as output_file:
-        json.dump(books, output_file)
-
-
-def remove_book(book_name):
-    print(book_name)
-
-
-def clear_books():
-    with open("/readings/Books.json", "w") as file:
-        json.dump([], file)
+        return table
