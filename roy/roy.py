@@ -1,12 +1,12 @@
 from typing import Optional, Tuple
 import typer
 
-from sys_commands.mount_drive import mount_me
-from sys_commands.github import get_github_token
+from mount_drive import mount_me
+from github import get_github_token
 
-from scripts.imgs_to_file import pngs_to_pdf
+from imgs_to_file import pngs_to_pdf
 
-from readings.books import list_books, add_book, remove_book, clear_books, open_book
+from books import list_books, add_book, remove_book, clear_books, open_book
 
 
 app = typer.Typer()
