@@ -1,5 +1,6 @@
 from typing import Optional, Tuple
 import typer
+import requests
 
 from console import get_console
 
@@ -42,6 +43,14 @@ def books():
     all_books = PrintAllReads()
     console = get_console()
     console.print(all_books.print_all_reads())
+
+
+@app.command()
+def salah_time() -> Optional[str]:
+    _url_str = "https://dailyprayer.abdulrcs.repl.co/api/egypt"
+    response = requests.get(_url_str).json()["today"]
+    typer.echo(response)
+    return
 
 
 if __name__ == "__main__":

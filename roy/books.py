@@ -3,7 +3,7 @@ from rich.table import Table
 
 
 class PrintAllReads:
-    with open("/media/data/projects/roy/roy/Books.json") as json_file:
+    with open("/media/data/open-source/roy/roy/Books.json") as json_file:
         all_books = json.load(json_file)
 
     def print_all_reads(self):
