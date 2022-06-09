@@ -1,13 +1,13 @@
 from typing import Optional, Tuple
 import typer
 import requests
+import json
 
 from console import get_console
 
 from mount_drive import mount_me
 from github import get_github_token
-from books import PrintAllReads
-from frontend import salah_in_table
+from frontend import table_view
 
 from imgs_to_file import pngs_to_pdf
 
@@ -41,15 +41,20 @@ def imgs_to_pdf(src: str, destination: str) -> None:
 
 @app.command()
 def books():
-    all_books = PrintAllReads()
-    console.print(all_books.print_all_reads())
+    with open("/media/data/open-source/roy/roy/Books.json") as json_file:
+        all_books = json.load(json_file)
+
+    data_to_print = [tuple(book.values()) for book in all_books.values()]
+    console.print(table_view("Books", ["Name", "Author", "Progress"], data_to_print))
 
 
 @app.command()
 def salah_time() -> Optional[str]:
     _url_str = "https://dailyprayer.abdulrcs.repl.co/api/egypt"
     response = requests.get(_url_str).json()["today"]
-    console.print(salah_in_table("SALAH TIME", ["Salah", "Time"], response))
+
+    data_to_print = [(k, v) for k, v in response.items()]
+    console.print(table_view("SALAH TIME", ["Salah", "Time"], data_to_print))
     return
 
 

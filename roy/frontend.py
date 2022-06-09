@@ -1,13 +1,15 @@
+from typing import List, Tuple
+
 from rich.table import Table
 
 
-def salah_in_table(title, columns_head, data):
+def table_view(title: str, columns: List, rows: List[Tuple]):
     table = Table(title=title)
 
-    for col in columns_head:
+    for col in columns:
         table.add_column(col, style="cyan", no_wrap=True)
 
-    for k, v in data.items():
-        table.add_row(k, v)
+    for row in rows:
+        table.add_row(*row)
 
     return table
