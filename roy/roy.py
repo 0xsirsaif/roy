@@ -7,11 +7,12 @@ from console import get_console
 from mount_drive import mount_me
 from github import get_github_token
 from books import PrintAllReads
+from frontend import salah_in_table
 
 from imgs_to_file import pngs_to_pdf
 
 app = typer.Typer()
-
+console = get_console()
 
 @app.command()
 def hello(name: str, job: str):
@@ -41,7 +42,6 @@ def imgs_to_pdf(src: str, destination: str) -> None:
 @app.command()
 def books():
     all_books = PrintAllReads()
-    console = get_console()
     console.print(all_books.print_all_reads())
 
 
@@ -49,7 +49,7 @@ def books():
 def salah_time() -> Optional[str]:
     _url_str = "https://dailyprayer.abdulrcs.repl.co/api/egypt"
     response = requests.get(_url_str).json()["today"]
-    typer.echo(response)
+    console.print(salah_in_table("SALAH TIME", ["Salah", "Time"], response))
     return
 
 
